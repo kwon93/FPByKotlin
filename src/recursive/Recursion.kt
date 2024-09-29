@@ -42,6 +42,22 @@ class Recursion {
         }
     }
 
+
+    //maximum 을 꼬리 재귀 함수로 refactoring 하기
+    tailrec fun tailRecursionMaximum(items: List<Int>, acc: Int = Int.MIN_VALUE): Int = when {
+        items.isEmpty() -> error("empty List!")
+        1 == items.size -> {
+            acc
+        }
+
+        else -> {
+            val head = items.head()
+            val maxValue = if (head > acc) head else acc
+            tailRecursionMaximum(items.tail(), maxValue)
+        }
+    }
+
+
     fun String.head() = first();
     fun String.tail() = drop(1);
 
@@ -89,6 +105,22 @@ class Recursion {
     }
 
     /**
+     * 꼬리 재귀 특정 패턴
+     * 1. 누산값의 타입은 최종 반환값의 타입과 같다.
+     * 2. 종료 조건의 반환간은 누산값이거 누산값을 포함한 연산 결과이다.
+     * 3. 중간 경과값을 만드는 순서는 보통 누산값 + 새로운 값 이다.
+     * 누산값이 memoization 의 역할을 한다 값을 담아두는...
+     */
+    tailrec fun tailTake(n: Int, list: List<Int>, accList: List<Int>): List<Int> = when {
+        n <= 0 -> accList
+        list.isEmpty() -> accList
+        else -> {
+            val takeList = accList + listOf(list.head())
+            tailTake(n - 1, list.tail(), takeList)
+        }
+    }
+
+    /**
      * 입력값 n 이 리스트에 존재하는지 확인하는 함수를 재귀로 작성해보기
      *
      * tail 이 값을 종료조건에 가까워지도록 축약해주는 조건이 된다.
@@ -98,4 +130,11 @@ class Recursion {
         list.head() == num -> true
         else -> elem(num, list.tail())
     }
+
+    fun func2(num: Int): Int = when {
+        num == 0 -> 0;
+        else -> num + func2(num - 1);
+    }
+
+
 }
