@@ -1,0 +1,7 @@
+package collection
+
+class Collections {
+
+
+
+}
