@@ -75,5 +75,14 @@ sealed class FunList<out T> {
         is FunList.Cons -> f(head, tail.foldRight(acc, f))
     }
 
+    tailrec fun <T1, T2, R> FunList<T1>.zipWith(
+        f: (T1, T2) -> R,
+        list: FunList<T2>,
+        acc: FunList<R> = FunList.Nil
+    ): FunList<R> = when {
+        this === FunList.Nil || list === FunList.Nil -> acc.reverse()
+        else -> getTail().zipWith(f, list.getTail(), acc.addHead(f(getHead(), list.getHead())))
+    }
+
 
 }
