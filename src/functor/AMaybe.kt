@@ -1,0 +1,4 @@
+package functor
+
+class AMaybe {
+}

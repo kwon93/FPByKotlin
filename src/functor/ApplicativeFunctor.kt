@@ -1,0 +1,4 @@
+package functor
+
+interface ApplicativeFunctor {
+}
