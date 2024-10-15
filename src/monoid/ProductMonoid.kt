@@ -1,0 +1,4 @@
+package monoid
+
+class ProductMonoid {
+}
